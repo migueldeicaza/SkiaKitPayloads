@@ -4,18 +4,11 @@
 
 # Cleanup from last time.
 rm -rf SkiaSharp.xcframework
-
-# Upstream version
-V=2.80.3
-
-# This version
-VV=1
-
-DIR=skiasharp-$V
-FILE=skiasharp-$V.zip
-FILE_LINUX=skiasharp-nativeassets-$V.zip
-URL=https://www.nuget.org/api/v2/package/SkiaSharp/$V
-URL_LINUX=https://www.nuget.org/api/v2/package/SkiaSharp.NativeAssets.Linux/$V
+. settings
+if test x$V = x; then
+    echo settings are wrong
+    exit 1
+fi
 
 rm -rf $DIR
 
@@ -105,5 +98,6 @@ create_xcframework() {
             -output SkiaSharp.xcframework
 }
 create_xcframework
-        
-gh release create -d SkiaKitNative-$V-$VV 
+
+
+
